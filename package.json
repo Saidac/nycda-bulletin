@@ -1,0 +1,27 @@
+{
+  "name": "nycda-bulletin",
+  "version": "1.0.0",
+  "description": "*Bulletin Board Application* Create a website that allows people to post messages to a page. A message consists of a title and a body. The site should have two pages: - The first page shows people a form where they can add a new message. - The second page shows each of the messages people have posted. Make sure there's a way to navigate the site so users can access each page.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "url": "git+https://github.com/Saidac/nycda-bulletin.git",
+    "type": "git"
+  },
+  "author": "William Saidac <sdfsfsds>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saidac/nycda-bulletin/issues"
+  },
+  "homepage": "https://github.com/Saidac/nycda-bulletin#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "method-override": "^2.3.6",
+    "morgan": "^1.7.0",
+    "pg": "^6.1.0",
+    "pug": "^2.0.0-beta6",
+    "sequelize": "^3.25.0"
+  }
+}
