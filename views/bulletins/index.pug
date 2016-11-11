@@ -1,0 +1,18 @@
+extends ../app.pug
+
+block content
+  .cointainer
+    h1 All messages
+    hr
+    each bulletin in bulletins
+      .card.card-block
+        .row
+          .col-md-4.hidden-md-down
+          .col-xs-12.col-md-8
+            a(href="/bulletins/" + bulletin.id)
+            h2= buletin.title
+            p= bulletin.message
+            .row
+              .col-xs-3.offset-xs-6
+              .col-xs-3
+                form(action="/books/" + book.id method="POST")
