@@ -22,10 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // tell express that we are using pug as view engine.
 app.set('view engine', 'pug');
 
+
 // Setting app pug to root
 app.get('/', (request, response) =>{
   Bulletin.findAll({ order: 'id ASC' }).then((bulletin) => {
-    response.render('app', { bulletins: bulletin });
+    response.render('bulletins/index', { bulletins: bulletin });
   });
 });
 
@@ -35,9 +36,6 @@ app.get('/bulletins/new', (request, response) => {
 
 // Create new bulletin function
 app.post('/postmessage', (request, response) => {
-  console.log('hellloooo');
-  console.log(request.body.title);
-  console.log(request.body);
 
   if (request.body.title) {
     Bulletin.create(request.body).then(() => {
