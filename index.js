@@ -1,15 +1,11 @@
 const express = require('express'),
       morgan = require('morgan'),
       pug = require('pug');
-      methodOverride = require('method-override');
       bodyParser = require('body-parser');
       Sequelize = require('sequelize');
 
 var app = express();
     sequelize = new Sequelize('wille','wille', '', {dialect: 'postgres' });
-
-// require bulletin router module
-var bulletinsRouter = require('./routes/bulletins');
 
 // Model
 var Bulletin = sequelize.define('bulletin', {
@@ -17,32 +13,40 @@ var Bulletin = sequelize.define('bulletin', {
   message: Sequelize.TEXT
 });
 
-// tell express to look for static files in public
-app.use(express.static('public'));
-
 // log server behaviour in terminal
 app.use(morgan('dev'));
 
 // parse http body so we can pass it as string??
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// over write http method
-app.use(methodOverride((req, res) => {
-   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-     var method = req.body._method;
-     delete req.body._method;
-     return method;
-   }})
- );
-
 // tell express that we are using pug as view engine.
 app.set('view engine', 'pug');
 
-app.get('/', (request, response) => {
-  response.redirect('/bulletins');
+// Setting app pug to root
+app.get('/', (request, response) =>{
+  Bulletin.findAll({ order: 'id ASC' }).then((bulletin) => {
+    response.render('app', { bulletins: bulletin });
+  });
 });
 
-app.use('/bulletins', bulletinsRouter);
+app.get('/bulletins/new', (request, response) => {
+  response.render('bulletins/new');
+});
+
+// Create new bulletin function
+app.post('/postmessage', (request, response) => {
+  console.log('hellloooo');
+  console.log(request.body.title);
+  console.log(request.body);
+
+  if (request.body.title) {
+    Bulletin.create(request.body).then(() => {
+      response.redirect('/');
+    });
+  } else {
+    response.redirect('/');
+  }
+});
 
 sequelize.sync().then(() => {
   console.log('Connected to db');
