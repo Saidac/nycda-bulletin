@@ -7,14 +7,13 @@ const sequelize = new Sequelize('wille', 'wille', '', { dialect: 'postgres' });
 // Model
 var Bulletin = sequelize.define('bulletin', {
   title: Sequelize.STRING,
-  author: Sequelize.STRING,
   message: Sequelize.TEXT
 });
 
 // Setting index pug to root
 router.get('/', (request, response) =>{
   Bulletin.findAll({ order: 'id ASC' }).then((bulletin) => {
-    response.render('bulletins/index', { bulletin: bulletin });
+    response.render('bulletins/index', { bulletins: bulletin });
   });
 });
 
@@ -39,3 +38,16 @@ router.get('/:id', (request, response) => {
     response.render('bulletins/show', { bulletin: bulletin});
   });
 });
+
+router.put('/:id', (request, response) => {
+  console.log(request.body);
+  Bulletin.update(request.body, {
+    where: {
+      id: request.params.id
+    }
+  }).then(() => {
+    response.redirect('/bulletin/' + request.params.id);
+  });
+});
+
+module.exports = router;

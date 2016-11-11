@@ -12,6 +12,17 @@ column name / column data type:
 - title: text
 - body: text
 
+
+$ createdb databasename
+
+$ dropdb databasename
+
+$ psql databasename
+
+If you leave our the databasename postgres by default tries to connect to a database named after your username that is why our default database was your user name
+
+
+
 *Additional Grading Criteria*
 
 As before, your package.json must include the correct dependencies.
