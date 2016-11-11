@@ -6,12 +6,12 @@ block content
       .col-xs-8.offset-xs-2
         h1 Create new message
         hr
-        form(action="/books" method="POST")
+        form(action="/bulletins" method="POST")
           div(class="form-group")
-            label(for="book-title") Title
-            inputname="title" type="text" class="form-control" id="bulletin-title")
+            label(for="bulletin-title") Title
+            input(name="title" type="text" class="form-control" id="bulletin-title")
           div(class="form-group")
-            label(for="book-desctiption") Message
-            textarea(name="decription" class="form-control" rows=5 id="bulletin-message")
+            label(for="bulletin-message") Message
+            textarea(name="message" class="form-control" rows=5 id="bulletin-message")
           div(class="form-group text-xs-right")
             button(type="submit" class="btn btn-lg btn-success") Post message
