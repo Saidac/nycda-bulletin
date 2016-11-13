@@ -4,14 +4,10 @@ block content
   .cointainer
     br
     each query in queries
-      .card.card-block
-        .row
-          .col-md-4.hidden-md-down
-          .col-xs-12.col-md-8
+      .row
+      .col-sm-6.offset-sm-2
+        .card.card-block
             a(href="/queries/" + query.id)
-            h2= query.question
-            p= query.signature
-            .row
-              .col-xs-3.offset-xs-6
-              .col-xs-3
-                form(action="/queries/" + query.id method="POST")
+            h3= query.question
+            p(align='right')='- '
+              em= query.signature
