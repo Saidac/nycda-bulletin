@@ -9,9 +9,9 @@ block content
         form(action="/postquery" method="POST")
           div(class="form-group")
             label(for="query-question") Question
-            textarea(name="question" rows=5 class="form-control" id="query-question")
+            textarea(name="question" type="text" rows=5 class="form-control" id="query-question")
           div(class="form-group")
             label(for="query-signature") Signature
-            input(name="signature" type="text"  class="form-control" id="query-signature")
+            input(name="signature" class="form-control" id="query-signature")
           div(class="form-group text-xs-right")
             button(type="submit" class="btn btn-lg btn-success") Ask

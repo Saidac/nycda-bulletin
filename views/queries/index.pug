@@ -1,0 +1,17 @@
+extends ../app.pug
+
+block content
+  .cointainer
+    br
+    each query in queries
+      .card.card-block
+        .row
+          .col-md-4.hidden-md-down
+          .col-xs-12.col-md-8
+            a(href="/queries/" + query.id)
+            h2= query.question
+            p= query.signature
+            .row
+              .col-xs-3.offset-xs-6
+              .col-xs-3
+                form(action="/queries/" + query.id method="POST")

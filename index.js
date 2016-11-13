@@ -8,9 +8,10 @@ var app = express();
     sequelize = new Sequelize('wille','wille', '', {dialect: 'postgres' });
 
 // Model
-var Bulletin = sequelize.define('bulletin', {
-  title: Sequelize.STRING,
-  message: Sequelize.TEXT
+// A guery can hold a question and a signature
+var Query = sequelize.define('query', {
+  question: Sequelize.TEXT,
+  signature: Sequelize.STRING
 });
 
 // log server behaviour in terminal
@@ -25,20 +26,20 @@ app.set('view engine', 'pug');
 
 // Setting app pug to root
 app.get('/', (request, response) =>{
-  Bulletin.findAll({ order: 'id ASC' }).then((bulletin) => {
-    response.render('bulletins/index', { bulletins: bulletin });
+  Query.findAll({ order: 'id DESC' }).then((query) => {
+    response.render('queries/index', { queries: query });
   });
 });
 
-app.get('/bulletins/new', (request, response) => {
-  response.render('bulletins/new');
+app.get('/queries/new', (request, response) => {
+  response.render('queries/new');
 });
 
-// Create new bulletin function
-app.post('/postmessage', (request, response) => {
+// Redirect user to frontpage after posting question
+app.post('/postquery', (request, response) => {
 
-  if (request.body.title) {
-    Bulletin.create(request.body).then(() => {
+  if (request.body.question) {
+    Query.create(request.body).then(() => {
       response.redirect('/');
     });
   } else {
